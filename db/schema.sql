@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS registrar_db;
-CREATE DATABASE registrar_db;
+DROP DATABASE IF EXISTS company_db;
+CREATE DATABASE IF ONLY NOT EXISTS company_db;
 
-USE registrar_db;
+USE company_db;
 
 CREATE TABLE deparments (
   id INT NOT NULL,
