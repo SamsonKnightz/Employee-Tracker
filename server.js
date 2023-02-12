@@ -18,7 +18,42 @@ const chooseOption = (type) => {
         init();
       });
     }
-    
+    case 'View All Departments': {
+      db.query('SELECT * FROM department', (err, department) => {
+        console.table(department);
+        init();
+      });
+    }
+    case 'View All Roles': {
+      db.query('SELECT * FROM role', (err, role) => {
+        console.table(role);
+        init();
+      });
+    }
+    case 'Add Employee': {
+      db.query('INSERT INTO employee', (err, employee) => {
+        console.table(employee);
+        init();
+      });
+    }
+    case 'Add A Department': {
+      db.query('SELECT * FROM employee', (err, employee) => {
+        console.table(employee);
+        init();
+      });
+    }
+    case 'Add A Role': {
+      db.query('SELECT * FROM employee', (err, employee) => {
+        console.table(employee);
+        init();
+      });
+    }
+    case 'Add A Department': {
+      db.query('SELECT * FROM employee', (err, employee) => {
+        console.table(employee);
+        init();
+      });
+    }
   }
 };
 
