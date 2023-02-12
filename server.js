@@ -13,33 +13,10 @@ const db = mysql.createConnection({
 const chooseOption = (type) => {
   switch (type) {
     case 'View All Employees': {
-      db.query('SELECT * FROM employees', (err, employees) => {
-        console.table(employees);
+      db.query('SELECT * FROM employee', (err, employee) => {
+        console.table(employee);
+        init();
       });
-    }
-    case 'View All Departments': {
-      selectAll('department', true);
-      break;
-    }
-    case 'View All Roles': {
-      selectAll('role', true);
-      break;
-    }
-    case 'Add Employee': {
-      addEmployee();
-      break;
-    }
-    case 'Add Department': {
-      addDepartment();
-      break;
-    }
-    case 'Add A Role': {
-      addRole();
-      break;
-    }
-    case 'Update An Emplyee Role': {
-      updateDepartment();
-      break;
     }
     
   }
