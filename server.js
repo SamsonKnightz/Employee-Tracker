@@ -17,43 +17,76 @@ const chooseOption = (type) => {
         console.table(employee);
         init();
       });
+      break;
     }
     case 'View All Departments': {
       db.query('SELECT * FROM department', (err, department) => {
         console.table(department);
         init();
       });
+      break;
     }
     case 'View All Roles': {
       db.query('SELECT * FROM role', (err, role) => {
         console.table(role);
         init();
       });
+      break;
     }
-    // case 'Add Employee': {
-    //   db.query('INSERT INTO employee', (err, employee) => {
-    //     console.table(employee);
-    //     init();
-    //   });
-    // }
+    case 'Add Employee': {
+      prompt([{
+        type: 'input',
+        name: 'first_name',
+        message: 'What is the first name of new emplyee?'
+      },
+      {
+        type: 'input',
+        name: 'last_name',
+        message: 'What is the last name of the new emplyee?'
+      },
+      {
+        type: 'input',
+        name: 'role_id',
+        message: 'What is your employee\'s role_id?'
+      },
+      {
+        type: 'input',
+        name: 'manager_id',
+        message: 'What is your employee\'s manager_id'
+      },
+      ])
+        .then((answers) => {
+          db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id)
+                VALUES
+                ('${answers.first_name}', '${answers.last_name}','${answers.role_id}', '${answers.manager_id}');`)
+          console.table(answers);
+          init();
+        });
+      break;
+    }
     // case 'Add A Department': {
     //   db.query('SELECT * FROM employee', (err, department) => {
     //     console.table(department);
     //     init();
     //   });
+    // break;
     // }
     // case 'Add A Role': {
     //   db.query('SELECT * FROM role', (err, role) => {
     //     console.table(role);
     //     init();
     //   });
+    // break;
     // }
     // case 'Add A Department': {
     //   db.query('SELECT * FROM employee', (err, employee) => {
     //     console.table(employee);
     //     init();
     //   });
+    // break;
     // }
+    // case 'EXIT': {
+    //   db.end();
   }
 };
 
