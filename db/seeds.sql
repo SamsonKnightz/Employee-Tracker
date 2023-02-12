@@ -1,8 +1,5 @@
 USE company_db;
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES
-('Samson', 'Vang', 1, NULL);
 
 INSERT INTO department (name)
 VALUES
@@ -11,7 +8,6 @@ VALUES
 ('Finance'),
 ('Human Resource'),
 ('Management');
-
 
 INSERT INTO role (title, salary, department_id)
 VALUES
@@ -25,3 +21,11 @@ VALUES
 ('Accountant', 72000, 3),
 ('QTM', 120000, 5),
 ('', 56000, 1);
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES
+('Samson', 'Vang', 1, NULL),
+('Samson', 'Vang', 2, 1),
+('Samson', 'Vang', 3, NULL),
+('Samson', 'Vang', 4, 1),
+('Samson', 'Vang', 5, NULL);
