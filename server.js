@@ -7,88 +7,15 @@ const db = mysql.createConnection({
   user: "root",
   database: "company_db",
 },
-  console.log(`Connected to the movies_db database.`)
+  console.log(`Connected to the company_db database.`)
 );
-
-const selectAll = async (table, display) => {
-  const results = await db.promise().query('SELECT * FROM ' + table);
-  if (display) {
-    console.table(results[0]);
-    return init();
-  }
-  return results;
-};
-
-const insert = (table, data) => {
-  db.query('INSERT INTO ?? SET ?', [table, data], (err) => {
-    if (err) return console.error(err);
-    console.log('\nSuccesfully created employee!\n');
-    init();
-  });
-};
-
-const selectAllNameAndValue = (table, name, value) => {
-  return db.promise().query('SELECT ?? AS name, ?? AS value FROM ??', [name, value, table]);
-};
-
-const selectAllEmployeeDetails = async () => {
-  const statement = `
-SELECT
-  employee.id,
-  employee.first_name,
-  employee.last_name,
-  role.title,
-  role.salary,
-  CONCAT(
-    manager.first_name,
-    ' ',
-    manager.last_name
-  ) AS manager
-FROM employee
-JOIN role
-ON employee.role_id = role.id
-JOIN employee AS manager
-ON employee.manager_id = manager.id
-  `
-    const [employees] = await db.promise().query(statement);
-    console.table(employees);
-  };
-
-const addEmployee = async () => {
-  const [roles] = await selectAllNameAndValue('role', 'title', 'id');
-  const [managers] = await selectAllNameAndValue('employee', 'last_name', 'id');
-  prompt([
-    {
-      name: 'first_name',
-      message: 'Enter the employee\'s first name.',
-    },
-    {
-      name: 'last_name',
-      message: 'Enter the employee\'s last name.',
-    },
-    {
-      type: 'rawlist',
-      name: 'role_id',
-      message: 'Choose a role for this employee.',
-      choices: roles,
-    },
-    {
-      type: 'rawlist',
-      name: 'manager_id',
-      message: 'Choose a manager for this employee.',
-      choices: managers,
-    }
-  ])
-  .then((answers) => {
-    insert('employee', answers);
-  });
-};
 
 const chooseOption = (type) => {
   switch (type) {
     case 'View All Employees': {
-      selectAllEmployeeDetails();
-      break;
+      db.query('SELECT * FROM employees', (err, employees) => {
+        console.table(employees);
+      });
     }
     case 'View All Departments': {
       selectAll('department', true);
@@ -102,6 +29,19 @@ const chooseOption = (type) => {
       addEmployee();
       break;
     }
+    case 'Add Department': {
+      addDepartment();
+      break;
+    }
+    case 'Add A Role': {
+      addRole();
+      break;
+    }
+    case 'Update An Emplyee Role': {
+      updateDepartment();
+      break;
+    }
+    
   }
 };
 
@@ -114,6 +54,9 @@ const init = () => {
       'View All Departments',
       'View All Roles',
       'Add Employee',
+      'Add A Department',
+      'Add A Role',
+      'Update An Employee Role'
     ],
     name: 'type',
   })

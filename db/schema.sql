@@ -5,12 +5,12 @@ USE company_db;
 
 CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  movie_name VARCHAR(100) NOT NULL
+  name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE role (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  job_title VARCHAR(30),
+  title VARCHAR(30),
   salary DECIMAL NOT NULL,
   department_id INT
 );
