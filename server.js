@@ -68,7 +68,7 @@ const chooseOption = (type) => {
       prompt([{
         type: 'input',
         name: 'name',
-        message: 'What is the first name of department?'
+        message: 'What is the name of department?'
       },
       ])
         .then((answers) => {
@@ -94,9 +94,6 @@ const chooseOption = (type) => {
     //   });
     // break;
     // }
-    case 'EXIT': {
-      db.end();
-    }
   }
 };
 
@@ -111,8 +108,7 @@ const init = () => {
       'Add Employee',
       'Add A Department',
       'Add A Role',
-      'Update An Employee Role',
-      'EXIT'
+      'Update An Employee Role'
     ],
     name: 'type',
   })
