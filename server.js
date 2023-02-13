@@ -64,13 +64,22 @@ const chooseOption = (type) => {
         });
       break;
     }
-    // case 'Add A Department': {
-    //   db.query('SELECT * FROM employee', (err, department) => {
-    //     console.table(department);
-    //     init();
-    //   });
-    // break;
-    // }
+    case 'Add A Department': {
+      prompt([{
+        type: 'input',
+        name: 'name',
+        message: 'What is the first name of department?'
+      },
+      ])
+        .then((answers) => {
+          db.query(`INSERT INTO department (name)
+                VALUES
+                ('${answers.name}`)
+          console.table(answers);
+          init();
+        });
+      break;
+    }
     // case 'Add A Role': {
     //   db.query('SELECT * FROM role', (err, role) => {
     //     console.table(role);
@@ -85,8 +94,9 @@ const chooseOption = (type) => {
     //   });
     // break;
     // }
-    // case 'EXIT': {
-    //   db.end();
+    case 'EXIT': {
+      db.end();
+    }
   }
 };
 
@@ -101,7 +111,8 @@ const init = () => {
       'Add Employee',
       'Add A Department',
       'Add A Role',
-      'Update An Employee Role'
+      'Update An Employee Role',
+      'EXIT'
     ],
     name: 'type',
   })
